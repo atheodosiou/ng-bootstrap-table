@@ -14,6 +14,7 @@ export class TableComponent implements OnInit {
   @Input() columns:BTableColumn[];
   @Input() value:any[];
   @Input() responsive:boolean=true;
+  // @Input() scrollable:boolean=false;
   @Input() tableClasses:string='table';
   @Input() theadClasses:string='';
   @Input() tableCaption:boolean=false;

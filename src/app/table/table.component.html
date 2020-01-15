@@ -1,6 +1,8 @@
 <div [ngClass]="{'table-responsive': responsive}">
   <table [ngClass]="tableClasses">
-    <caption *ngIf="tableCaption">List of users</caption>
+    <caption *ngIf="tableCaption">
+      <b-paginator></b-paginator>
+    </caption>
     <thead *ngIf="columns?.length>0" [ngClass]="theadClasses">
       <tr>
         <th scope="col" *ngFor="let col of columns">{{col.header}}</th>

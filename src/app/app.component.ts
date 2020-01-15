@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
 
   tableClasses='table table-striped table-hover table-bordered table-sm';
   theadClasses='thead-dark';
-
+  
   ngOnInit(){
     this.http.get('https://jsonplaceholder.typicode.com/users')
     .subscribe((users:any[])=>{
