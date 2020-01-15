@@ -1,0 +1,15 @@
+<div [ngClass]="{'table-responsive': responsive}">
+  <table [ngClass]="tableClasses">
+    <caption *ngIf="tableCaption">List of users</caption>
+    <thead *ngIf="columns?.length>0" [ngClass]="theadClasses">
+      <tr>
+        <th scope="col" *ngFor="let col of columns">{{col.header}}</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="value?.length>0">
+      <tr *ngFor="let rowData of value" (click)="onRowClicked(rowData)">
+        <th scope="row" *ngFor="let col of columns">{{rowData[col.field]||''}}</th>
+      </tr>
+    </tbody>
+  </table>
+</div>
