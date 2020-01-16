@@ -14,10 +14,12 @@ export class TableComponent implements OnInit {
   @Input() columns:BTableColumn[];
   @Input() value:any[];
   @Input() responsive:boolean=true;
+  @Input() paginator:boolean=false;
+  @Input() rows:number;
+
   // @Input() scrollable:boolean=false;
   @Input() tableClasses:string='table';
   @Input() theadClasses:string='';
-  @Input() tableCaption:boolean=false;
 
   //Output events
   @Output() onRowSelect:EventEmitter<any>=new EventEmitter<any>();
@@ -29,5 +31,9 @@ export class TableComponent implements OnInit {
     if(event){
       this.onRowSelect.emit(event);
     }
+  }
+
+  onPageSelect(page:number){
+    console.log(page);
   }
 }

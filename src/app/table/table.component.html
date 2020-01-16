@@ -1,7 +1,10 @@
 <div [ngClass]="{'table-responsive': responsive}">
   <table [ngClass]="tableClasses">
-    <caption *ngIf="tableCaption">
-      <b-paginator [total]="10"></b-paginator>
+    <caption *ngIf="paginator && rows>0">
+      <b-paginator 
+      [total]="rows" 
+      (onPageSelect)="onPageSelect($event)">
+    </b-paginator>
     </caption>
     <thead *ngIf="columns?.length>0" [ngClass]="theadClasses">
       <tr>
