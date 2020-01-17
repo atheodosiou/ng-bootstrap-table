@@ -1,8 +1,8 @@
 <div [ngClass]="{'table-responsive': responsive}">
   <table [ngClass]="tableClasses">
-    <caption *ngIf="paginator && rows>0">
-      <b-paginator 
-      [total]="rows" 
+    <caption *ngIf="paginator && rows>0 && value?.length>0">
+      <b-paginator
+      [total]="rows"
       (onPageSelect)="onPageSelect($event)">
     </b-paginator>
     </caption>
@@ -12,7 +12,10 @@
       </tr>
     </thead>
     <tbody *ngIf="value?.length>0">
-      <tr *ngFor="let rowData of value" (click)="onRowClicked(rowData)">
+      <tr *ngFor="let rowData of value" (click)="onRowClicked(rowData)"
+      [class.table-primary]="rowData.selected"
+      [ngClass]="trClasses"
+      >
         <th scope="row" *ngFor="let col of columns">{{rowData[col.field]||''}}</th>
       </tr>
     </tbody>

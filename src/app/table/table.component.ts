@@ -20,6 +20,8 @@ export class TableComponent implements OnInit {
   // @Input() scrollable:boolean=false;
   @Input() tableClasses:string='table';
   @Input() theadClasses:string='';
+  @Input() trClasses:string=''
+  // @Input() selectedRowClass:string='table-primary'
 
   //Output events
   @Output() onRowSelect:EventEmitter<any>=new EventEmitter<any>();
@@ -28,6 +30,12 @@ export class TableComponent implements OnInit {
   }
 
   onRowClicked(event:any){
+    this.value.forEach(row=>{
+      if(row.selected){
+        row.selected=false;
+      }
+    })
+    event.selected=true;
     if(event){
       this.onRowSelect.emit(event);
     }
