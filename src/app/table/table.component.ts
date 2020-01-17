@@ -16,12 +16,12 @@ export class TableComponent implements OnInit {
   @Input() responsive:boolean=true;
   @Input() paginator:boolean=false;
   @Input() rows:number;
-
-  // @Input() scrollable:boolean=false;
+  @Input() totalRecords:number;
   @Input() tableClasses:string='table';
   @Input() theadClasses:string='';
   @Input() trClasses:string=''
   // @Input() selectedRowClass:string='table-primary'
+  // @Input() scrollable:boolean=false;
 
   //Output events
   @Output() onRowSelect:EventEmitter<any>=new EventEmitter<any>();
@@ -51,7 +51,6 @@ export class TableComponent implements OnInit {
 
 
 import { NgModule } from "@angular/core";
-// import { TableComponent } from './table.component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from '../paginator/paginator.module';

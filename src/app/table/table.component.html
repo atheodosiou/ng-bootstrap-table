@@ -2,7 +2,8 @@
   <table [ngClass]="tableClasses">
     <caption *ngIf="paginator && rows>0 && value?.length>0">
       <b-paginator
-      [total]="rows"
+      [totalRecords]="totalRecords"
+      [rows]="rows"
       (onPageSelect)="onPageSelect($event)">
     </b-paginator>
     </caption>
