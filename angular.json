@@ -127,6 +127,41 @@
           }
         }
       }
+    },
+    "ng-bootstrap-table": {
+      "projectType": "library",
+      "root": "projects/ng-bootstrap-table",
+      "sourceRoot": "projects/ng-bootstrap-table/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ng-bootstrap-table/tsconfig.lib.json",
+            "project": "projects/ng-bootstrap-table/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ng-bootstrap-table/src/test.ts",
+            "tsConfig": "projects/ng-bootstrap-table/tsconfig.spec.json",
+            "karmaConfig": "projects/ng-bootstrap-table/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ng-bootstrap-table/tsconfig.lib.json",
+              "projects/ng-bootstrap-table/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "bDataTableDemo"
 }

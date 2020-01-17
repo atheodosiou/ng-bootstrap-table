@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ng-bootstrap-table": [
+        "dist/ng-bootstrap-table"
+      ],
+      "ng-bootstrap-table/*": [
+        "dist/ng-bootstrap-table/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
