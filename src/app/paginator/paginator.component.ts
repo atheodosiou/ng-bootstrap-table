@@ -12,7 +12,7 @@ export class PaginatorComponent implements OnInit {
   _activePage: number;
   _pages: any[];
   _numOfPages: number;
-
+  hidePaginator:boolean=false;
   @Input() totalRecords: number;
   @Input() rows: number;
   //Output events
@@ -23,9 +23,15 @@ export class PaginatorComponent implements OnInit {
     if (!this.totalRecords || !this.rows) {
       throw new Error('You must provide \'totalRecords\' and \'rows\' properties!');
     }
-    this._numOfPages = this.getPagesNumber(this.totalRecords, this.rows);
-    this.createPages(this._numOfPages);
-    this.setPage(1);
+    if(this._numOfPages<=this.rows){
+      this.hidePaginator=true;
+    }else{
+      this.hidePaginator=false;
+      this._numOfPages = this.getPagesNumber(this.totalRecords, this.rows);
+      this.createPages(this._numOfPages);
+      this.setPage(1);
+    }
+   
   }
 
   setPage(page: number, event?) {

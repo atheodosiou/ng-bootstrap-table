@@ -21,15 +21,17 @@ export class AppComponent implements OnInit {
 
   data:any[];
   _data:any[];
+  rows:number=5;
+  activePage:number = 1;
 
-  tableClasses='table table-striped table-hover table-bordered table-sm';
-  theadClasses='thead-dark';
+  tableClasses='table table-striped table-hover table-borderless';
+  theadClasses='';
   
   ngOnInit(){
     this.http.get('https://jsonplaceholder.typicode.com/users')
     .subscribe((users:any[])=>{
       this._data=users;
-      this.data = this.paginate(this._data,3,1);
+      this.data = this.paginate(this._data,this.rows,this.activePage);
     });
   }
 
