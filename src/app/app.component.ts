@@ -35,4 +35,8 @@ export class AppComponent implements OnInit {
   onRowSelect(event){
     console.log(event);
   }
+
+  onPageChange(event){
+    console.log(event);
+  }
 }

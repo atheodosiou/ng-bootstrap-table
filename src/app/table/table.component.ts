@@ -25,6 +25,7 @@ export class TableComponent implements OnInit {
 
   //Output events
   @Output() onRowSelect:EventEmitter<any>=new EventEmitter<any>();
+  @Output() onPageChange:EventEmitter<any>=new EventEmitter<any>();
 
   ngOnInit() {
   }
@@ -42,7 +43,9 @@ export class TableComponent implements OnInit {
   }
 
   onPageSelect(page:number){
-    console.log(page);
+    if(this.paginator){
+      this.onPageChange.emit(page)
+    }
   }
 }
 
