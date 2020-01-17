@@ -1,12 +1,13 @@
 <div class="container">
   <p class="text-center font-weight-bold">Bootstrap Data Table Demo</p>
   <b-table 
+  *ngIf="_data"
   [columns]="columns" 
   [value]="data" 
   [responsive]="true"
   [paginator]="true"
-  [rows]="5"
-  [totalRecords]="38"
+  [rows]="3"
+  [totalRecords]="_data.length"
   [tableClasses]="tableClasses"
   [theadClasses]="theadClasses"
   (onRowSelect)="onRowSelect($event)"

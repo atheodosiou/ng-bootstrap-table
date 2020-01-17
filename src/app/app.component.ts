@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   ];
 
   data:any[];
+  _data:any[];
 
   tableClasses='table table-striped table-hover table-bordered table-sm';
   theadClasses='thead-dark';
@@ -27,8 +28,8 @@ export class AppComponent implements OnInit {
   ngOnInit(){
     this.http.get('https://jsonplaceholder.typicode.com/users')
     .subscribe((users:any[])=>{
-      this.data=users;
-      console.log(this.data);
+      this._data=users;
+      this.data = this.paginate(this._data,3,1);
     });
   }
 
@@ -37,6 +38,13 @@ export class AppComponent implements OnInit {
   }
 
   onPageChange(event){
-    console.log(event);
+    
+    this.data= this.paginate(this._data,event.rowsPerPage,event.activePage);
+    console.log(event,this.data);
+  }
+
+  private paginate(array:any[],page_size:number,page_number:number):any[]{
+    --page_number;
+    return array.slice(page_number * page_size, (page_number + 1) * page_size);
   }
 }
