@@ -1,27 +1,60 @@
-# BDataTableDemo
+# NgBootstrapTable
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
+## A lightwaigt data table Angular 2+ componet for Bootstrap
 
-## Development server
+### Usage: 
+First we need to install Bootstrap 4+ and then install the [ng-bootstrap-table](https://www.npmjs.com/package/ng-bootstrap-table) package via npm using the command below:
+```Javascript
+npm i ng-bootstrap-table
+```
+### Importing the BootstrapTableModule
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+```Javascript
+import { BootstrapTableModule } from 'ng-bootstrap-table';
 
-## Code scaffolding
+@NgModule({
+  ...
+   imports: [
+      ...,
+      BootstrapTableModule 
+   ],
+   ...
+})
+export class AppModule { }
+```
+### Declare the table component into our HTML template
+```HTML
+  <b-table 
+  [columns]="columns" 
+  [value]="data" 
+  [responsive]="true"
+  [paginator]="true"
+  [rows]="rows"
+  [totalRecords]="_data.length"
+  [tableClasses]="tableClasses"
+  [theadClasses]="theadClasses"
+  (onRowSelect)="onRowSelect($event)"
+  (onPageChange)="onPageChange($event)"
+  ></b-table>
+```
+### Documentation
+List of all supported properties which must/can be used with b-table.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Property | Type | Default | Short Description 
+--- | --- | --- | ---
+columns | array | null | An array of objects to represent dynamic columns.
+value | array | null | An array of objects to display.
+responsive | boolean | false | Defines if the table should be responsive or not.
+paginator | boolean | false | Defines if the table should be have a paginator or not.
+rows | number | null | Defines the total number of rows per page in the table.
+totalRecords | number | null | The total number of `value` entries.
+tableClasses | string | null | Bootstrap classes to be applied on `<table>` tag.
+theadClasses | string | null | Bootstrap classes to be applied on `<thead>` tag.
+trClasses | string | null | Bootstrap classes to be applied on `<tr>` tag.
 
-## Build
+List of events
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Event | Parameters | Description
+--- | --- | ---
+onRowSelect |  | Callback to invoke when a row is selected.
+onPageChange |  | Callback to invoke when a page is changed.
