@@ -61,7 +61,7 @@ onPageChange | Object | Callback to invoke when a page is changed.
 
 
 ### Event parameters
-onRowSelect -->  Object --> Details
+onRowSelect: Returns an object with the following stracture.
 
 ```Javascript 
 {
@@ -76,4 +76,5 @@ onRowSelect -->  Object --> Details
 }
 ```
 onPageChange -->  Object --> Details
-The selected row with the coresponding data of the value array.
+
+Returns the selected row with the coresponding data of the value array.
