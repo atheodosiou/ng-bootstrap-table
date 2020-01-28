@@ -56,5 +56,24 @@ List of events
 
 Event | Parameters | Description
 --- | --- | ---
-onRowSelect |  | Callback to invoke when a row is selected.
-onPageChange |  | Callback to invoke when a page is changed.
+onRowSelect | Object | Callback to invoke when a row is selected.
+onPageChange | Object | Callback to invoke when a page is changed.
+
+
+### Event parameters
+onRowSelect -->  Object --> Details
+
+```Javascript 
+{
+  nextPage: 3,
+  activePage: 2,
+  previousPage: 1,
+  rowsPerPage: 4,
+  totalRecords: 10
+  totalPages: 3,
+  limit: 4,
+  offset: 4
+}
+```
+onPageChange -->  Object --> Details
+The selected row with the coresponding data of the value array.
