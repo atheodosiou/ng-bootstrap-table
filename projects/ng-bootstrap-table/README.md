@@ -4,7 +4,7 @@
 
 ## A lightwaigt data table Angular 2+ componet for Bootstrap
 ### Prerequisites:
-Make sure that you hava already installed bootstrap! If you do not, you can add it by CDN. Just add a link tag into your index.html like the link below:
+Make sure that you have already installed bootstrap! If you do not, you can add it by CDN. Just add a link tag into your index.html like the link below:
 ```html
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 ```
