@@ -57,6 +57,17 @@ export class AppModule { }
   (onPageChange)="onPageChange($event)"
   ></b-table>
 ```
+### Scrollable Body
+Ng-bootstrap-table also supports scrollable behaviour. If you need so, you must specify the following properties:
+```html
+  <b-table 
+  ...
+  [scrollable]="true"
+  scrollHeight="150px"
+  rowHeight="45px"
+  ...
+  ></b-table>
+  ```
 ### Column definition
 
 ```Typescript
@@ -76,6 +87,9 @@ Property | Type | Default | Short Description
 columns | BTableColumn array | null | An array of objects to represent dynamic columns.
 value | array | null | An array of objects to display.
 responsive | boolean | false | Defines if the table should be responsive or not.
+scrollable | boolean | false | Defines if the table should have a scrollable body.
+scrollHeight | string | null | Defines the scroll height of the table body.
+rowHeight | string | null | Defines the row height of the table body.
 paginator | boolean | false | Defines if the table should be have a paginator or not.
 rows | number | null | Defines the total number of rows per page in the table.
 totalRecords | number | null | The total number of `value` entries.
@@ -120,6 +134,38 @@ e.g. A dark table style with borderes...
 
  In the same way you can use to theadClasses and trClasses properties in order to customize more your table component.
 
+#### Styling the table haeder
+If you want to change the default style of the table header, you must override the .b-table-header class like below:
+```css
+:host ::ng-deep .b-table-container table .b-table-header{
+    //Default
+    // background-color: whitesmoke;
+    // color: black;
+    background-color: lightblue !important;
+    color: blue !important;
+}
+```
+![styling](https://user-images.githubusercontent.com/20326000/74109395-b48e8d80-4b8b-11ea-8263-acf9894d6a46.png)
+
+### Styling the paginator
+In order to change the default style of the paginator, you have to override the .b-table-paginator-container class like below:
+```css
+:host ::ng-deep .b-table-paginator-container {
+    //Default Style
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    //justify-content: flex-start;
+    justify-content: center !important;
+}
+```
+![paginator-styling](https://user-images.githubusercontent.com/20326000/74109501-9f662e80-4b8c-11ea-8eb9-ed3206c6a6c1.png)
+
+#### Clases
+Class | Default |  Description
+--- | --- | ---
+.b-table-header | ```background-color: whitesmoke; color: black;``` | The class which is applied on ```<tr>``` tag of the ```<thead>``` tag. 
+.b-table-paginator-container | ```  display: flex;align-items: center;justify-content: flex-start;``` | The container class of the paginator
 ### Contribution
 Feel free to contribute and/or report a bug at the [GitHub Repository](https://github.com/atheodosiou/ng-bootstrap-table).
 

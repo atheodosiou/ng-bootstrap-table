@@ -1,19 +1,21 @@
 <div class="b-table-container" [ngClass]="{'table-responsive': responsive, 'b-table-fixed-head':scrollable}" 
-  [ngStyle]="{height:scrollable?scrollHeight:'auto'}">
+  [ngStyle]="{height:scrollable?scrollHeight:''}">
   <table [ngClass]="tableClasses">
     <thead *ngIf="columns?.length>0" [ngClass]="theadClasses">
-      <tr [class.bg-dark]="scrollable" [class.text-light]="scrollable" [class.sticky-top]="scrollable" >
+      <tr [class.b-table-header]="scrollable" [class.sticky-top]="scrollable">
         <th scope="col" *ngFor="let col of columns">{{col.header}}</th>
       </tr>
     </thead>
     <tbody *ngIf="value?.length>0">
       <tr *ngFor="let rowData of value" (click)="onRowClicked(rowData)" [class.table-primary]="rowData.selected"
-        [ngClass]="trClasses">
+        [ngClass]="trClasses" [ngStyle]="{height:scrollable?rowHeight:''}">
         <th scope="row" *ngFor="let col of columns">{{rowData[col.field]||''}}</th>
       </tr>
     </tbody>
   </table>
 </div>
-<b-paginator *ngIf="paginator && rows>0 && value?.length>0" [totalRecords]="totalRecords" [rows]="rows"
-  (onPageSelect)="onPageSelect($event)">
-</b-paginator>
+<div class="b-table-paginator-container" *ngIf="paginator && rows>0 && value?.length>0">
+  <b-paginator [totalRecords]="totalRecords" [rows]="rows"
+    (onPageSelect)="onPageSelect($event)">
+  </b-paginator>
+</div>

@@ -22,7 +22,7 @@ export class TableComponent implements OnInit {
   @Input() trClasses:string=''
   @Input() scrollable:boolean = false;
   @Input() scrollHeight:string;
-  
+  @Input() rowHeight:string;
   // @Input() selectedRowClass:string='table-primary'
   // @Input() scrollable:boolean=false;
 

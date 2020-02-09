@@ -1,0 +1,16 @@
+//Header styling
+:host ::ng-deep .b-table-container table .b-table-header{
+    //Default Style
+    // background-color: whitesmoke !important;
+    // color: black;
+    background-color: purple !important;
+    color: white !important;
+}
+//Paginator styling
+:host ::ng-deep .b-table-paginator-container {
+    //Default Style
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+    justify-content: center !important;
+}
