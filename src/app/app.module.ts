@@ -4,8 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { BootstrapTableModule } from './table/table.component';
-
+import { NgBootstrapTableModule } from '../../projects/ng-bootstrap-table/src/lib/ng-bootstrap-table.module'
 @NgModule({
    declarations: [
       AppComponent
@@ -13,8 +12,8 @@ import { BootstrapTableModule } from './table/table.component';
    imports: [
       BrowserModule,
       FormsModule,
-      BootstrapTableModule,
-      HttpClientModule 
+      HttpClientModule,
+      NgBootstrapTableModule
    ],
    providers: [],
    bootstrap: [

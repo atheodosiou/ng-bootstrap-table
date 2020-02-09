@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { BTableColumn } from './models/table-columns.interface';
+import { BTableColumn } from '../models/table-columns.interface';
 
 @Component({
   selector: 'b-table',

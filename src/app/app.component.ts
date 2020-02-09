@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BTableColumn } from './table/models/table-columns.interface';
+import { BTableColumn } from '../../projects/ng-bootstrap-table/src/lib/models/table-columns.interface';
 import { HttpClient } from '@angular/common/http';
 
 @Component({

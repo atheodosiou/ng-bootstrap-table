@@ -3,6 +3,24 @@
 ![table-ligth](https://user-images.githubusercontent.com/20326000/73258331-264efa80-41ce-11ea-9d31-03559632616c.png)
 
 ## A lightwaigt data table Angular 2+ componet for Bootstrap
+### Prerequisites:
+Make sure that you hava already installed bootstrap! If you do not, you can add it by CDN. Just add a link tag into your index.html like the link below:
+```html
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+```
+Otherwise, you can add it via NPM simple by running the following command:
+```sh
+npm install --save bootstrap
+```
+Then you have to link the bootstrap.min.css into you styles in your angular.json file.
+
+```json
+ "styles": [
+              ...
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              ...
+            ]
+```
 
 ### Usage: 
 First we need to install Bootstrap 4+ and then install the [ng-bootstrap-table](https://www.npmjs.com/package/ng-bootstrap-table) package via npm using the command below:

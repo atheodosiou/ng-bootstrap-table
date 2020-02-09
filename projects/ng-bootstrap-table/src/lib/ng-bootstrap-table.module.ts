@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
-import { NgBootstrapTableComponent } from './ng-bootstrap-table.component';
-
-
+import { BootstrapTableModule } from './/table/table.component';
 
 @NgModule({
-  declarations: [NgBootstrapTableComponent],
   imports: [
+    BootstrapTableModule
   ],
-  exports: [NgBootstrapTableComponent]
+  exports: [BootstrapTableModule]
 })
 export class NgBootstrapTableModule { }
