@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   rows:number=5;
   activePage:number = 1;
 
-  tableClasses='table table-striped table-hover table-borderless';
+  tableClasses='table table-striped table-hover table-bordered';
   theadClasses='';
   
   ngOnInit(){

@@ -1,7 +1,9 @@
-.tableFixHead          { overflow-y: auto; height: 100px; }
-.tableFixHead thead th { position: sticky; top: 0; }
+.b-table-container {margin-bottom: .25em;}
+.b-table-container table {margin: 0px;}
+.b-table-container.b-table-fixed-head         { overflow-y: auto;}
+// .b-table-container.b-table-fixed-head thead th { position: sticky; top: 0;}
 
 /* Just common table stuff. Really. */
-table  { border-collapse: collapse; width: 100%; }
+table  { border-collapse: collapse; width: 100%;}
 th, td { padding: 8px 16px; }
 // th     { background:#eee; }
