@@ -8,11 +8,9 @@ branches:
   - master
 before_script:
   - echo "Build started..."
+  - npm install -g @angular/cli
 addons:
   chrome: stable
-before_install:
-  - # start your web application and listen on `localhost`
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 script:
 - npm ci
 - npm test-headless
