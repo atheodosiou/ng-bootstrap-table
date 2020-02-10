@@ -6,7 +6,7 @@ branches:
   only:
   - master
 before_script:
-  - echo "Build started..."
+  - echo "Installing Angular Globaly..."
   - npm install -g @angular/cli
 addons:
   chrome: stable
