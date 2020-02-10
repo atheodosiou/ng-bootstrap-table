@@ -1,7 +1,5 @@
 import { TestBed, async } from '@angular/core/testing';
 import { PaginatorComponent } from './paginator.component';
-import { PaginatorModule } from '../paginator/paginator.module';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 describe('Paginator Component', () => {

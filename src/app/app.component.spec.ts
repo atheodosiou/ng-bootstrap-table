@@ -1,12 +1,19 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-
+import { NgBootstrapTableModule } from '../../projects/ng-bootstrap-table/src/lib/ng-bootstrap-table.module'
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
       ],
+      imports:[
+        FormsModule,
+        HttpClientModule,
+        NgBootstrapTableModule
+      ]
     }).compileComponents();
   }));
 

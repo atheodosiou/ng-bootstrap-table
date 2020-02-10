@@ -10,7 +10,7 @@ before_script:
   - echo "Build started..."
 script:
 - npm ci
-- npm test
+- npm test-headless
 - npm run build:lib
 after_script:
   - echo "Build ended!"
