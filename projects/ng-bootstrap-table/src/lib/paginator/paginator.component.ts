@@ -20,6 +20,7 @@ export class PaginatorComponent implements OnInit {
 
   //============================ Public Methods ============================
   ngOnInit() {
+    console.warn('ngOnInit() was called!')
     if (!this.totalRecords || !this.rows) {
       throw new Error('You must provide \'totalRecords\' and \'rows\' properties!');
     }
