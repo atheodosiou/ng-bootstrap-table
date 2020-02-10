@@ -1,8 +1,8 @@
-# NgBootstrapTable *(WIP)*
-
+# ng-bootstrap-table *(WIP)*
 ![table-ligth](https://user-images.githubusercontent.com/20326000/73258331-264efa80-41ce-11ea-9d31-03559632616c.png)
 
-## A lightweight data table Angular 2+ component for Bootstrap
+## A lightweight, bootstrap styled Angular data table component!
+
 ### Prerequisites:
 Make sure that you have already installed bootstrap! If you do not, you can add it by CDN. Just add a link tag into your index.html like the link below:
 ```html
