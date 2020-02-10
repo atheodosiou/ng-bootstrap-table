@@ -11,9 +11,13 @@ before_script:
   - npm install -g @angular/cli
 addons:
   chrome: stable
+cache:
+  npm:true
+  directories:
+    -node_modules
 script:
 - npm ci
-- npm test-headless
+- npm run test-headless
 - npm run build:lib
 after_script:
   - echo "Build ended!"
