@@ -42,7 +42,7 @@ describe('Paginator Component', () => {
         component.totalRecords = 100;
         component.rows = 10;
         component['ngOnInit']();
-        console.log("NumOfPages:", component._numOfPages)
+        
         const testCases = [
             { page: 1, nextPage: 2, activePage: 1, previousPage: null, rowsPerPage: component.rows, totalRecords: component.totalRecords, totalPages: component._numOfPages, limit: component.rows, offset: (1*component.rows)-component.rows },
             { page: 3, nextPage: 4, activePage: 3, previousPage: 2, rowsPerPage: component.rows, totalRecords: component.totalRecords, totalPages: component._numOfPages, limit: component.rows, offset: (3*component.rows)-component.rows },

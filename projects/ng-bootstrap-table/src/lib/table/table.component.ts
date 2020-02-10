@@ -31,6 +31,7 @@ export class TableComponent implements OnInit {
   @Output() onPageChange:EventEmitter<any>=new EventEmitter<any>();
 
   ngOnInit() {
+    this.checkInputs();
   }
 
   onRowClicked(event:any){
@@ -48,6 +49,18 @@ export class TableComponent implements OnInit {
   onPageSelect(page:number){
     if(this.paginator){
       this.onPageChange.emit(page)
+    }
+  }
+
+  private checkInputs(){
+    if(!this.columns || !this.value){
+      throw new Error('Missing required properties! \'columns\' and \'value\' must be provided.')
+    }
+
+    if(this.paginator === true){
+      if(!this.rows || !this.totalRecords){
+        throw new Error('Missing required properties! \'rows\' and \'totalRecords\' must be provided if \'paginator\' is true.')
+      }
     }
   }
 }
