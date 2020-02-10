@@ -8,6 +8,13 @@ branches:
   - master
 before_script:
   - echo "Build started..."
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - dpkg
+      - google-chrome-stable
 script:
 - npm ci
 - npm test-headless
