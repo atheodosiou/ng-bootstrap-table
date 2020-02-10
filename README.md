@@ -1,3 +1,6 @@
+![Travis (.org)](https://img.shields.io/travis/atheodosiou/ng-bootstrap-table?color=green)
+![npm](https://img.shields.io/npm/dt/ng-bootstrap-table?color=blue)
+
 # ng-bootstrap-table *(WIP)*
 ![table-ligth](https://user-images.githubusercontent.com/20326000/73258331-264efa80-41ce-11ea-9d31-03559632616c.png)
 
