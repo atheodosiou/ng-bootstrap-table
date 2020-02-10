@@ -1,33 +1,35 @@
 <nav *ngIf="_pages && hidePaginator!==true">
-  <ul class="pagination pagination-sm">
-   
-    <ng-container *ngIf="_pages?.length<=20">
+  <!-- <ul class="pagination pagination-sm">
       <li  class="page-item" *ngFor="let page of _pages; let i=index"
       [ngClass]="{'active':(i+1)==_activePage}">
         <a class="page-link" (click)="setPage(page.number,$event)">{{page.number}}</a>
       </li>
-    </ng-container>
-   <!-- <ng-container *ngIf="_pages?.length>20">
-    <li class="page-item">
-      <a class="page-link" href="#" aria-label="Previous">
-        <span aria-hidden="true">&laquo;</span>
-      </a>
-    </li>
-    <li  class="page-item" >
-        <a class="page-link" (click)="setPage(_pages[0].number,$event)">{{_pages[0].number}}</a>
-      </li>
-      <li  class="page-item" >
-        <a class="page-link">...</a>
-      </li>
-      <li  class="page-item" >
-        <a class="page-link"  (click)="setPage(_pages[_pages.length-1].number,$event)">{{_pages[_pages.length-1].number}}</a>
-      </li>
-    <li *ngIf="_pageEvent" class="page-item">
-      <a class="page-link"  aria-label="Next" [attr.disabled]="_pageEvent.nextPage===null" (click)="setPage(_pageEvent.nextPage,$event)">
-        <span aria-hidden="true">&raquo;</span>
-      </a>
-    </li>
-   </ng-container> -->
-  
-  </ul>
+  </ul> -->
+  <ng-container *ngTemplateOutlet="defaultPaginatorTemplate"></ng-container>
 </nav>
+
+<ng-template #defaultPaginatorTemplate>
+  <ul class="pagination pagination-sm">
+    <li class="page-item">
+      <a class="page-link" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item">
+      <a class="page-link">1</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link text-primary">2</a>
+    </li>
+    <li class="page-item">
+      <a class="page-link">3</a>
+    </li>
+    <li class="page-item" (click)="setPage()">
+      <a class="page-link" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </a>
+    </li>
+  </ul>
+</ng-template>
