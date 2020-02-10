@@ -1,5 +1,16 @@
 {
+  "version": "0.0.6",
   "name": "ng-bootstrap-table",
+  "description": "A lightweight, bootstrap styled Angular data table component!",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Anastasios Theodosiou",
+    "url": "http://anastasios.theodosiou.me",
+    "email": "anastasios.theodosiou@gmail.com"
+  },
+  "repository": {
+    "url": "https://github.com/atheodosiou/ng-bootstrap-table"
+  },
   "peerDependencies": {
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14"
@@ -12,6 +23,5 @@
     "grid",
     "light",
     "fast"
-  ],
-  "version": "0.0.1"
+  ]
 }
