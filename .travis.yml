@@ -17,5 +17,16 @@ script:
 - npm ci
 - npm run test-headless
 - npm run build:lib
+- npm run build
+- mv dist/bDataTableDemo/index.html dist/bDataTableDemo/404.html
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist/bDataTableDemo
+  on:
+    branch: master
+
 after_script:
   - echo "Build ended!"
