@@ -12,5 +12,6 @@
     "grid",
     "light",
     "fast"
-  ]
+  ],
+  "version": "0.0.1"
 }
