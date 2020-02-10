@@ -12,6 +12,7 @@ export class PaginatorComponent implements OnInit {
   _activePage: number;
   _pages: any[];
   _numOfPages: number;
+  _pageEvent:any;
   hidePaginator:boolean=false;
   @Input() totalRecords: number;
   @Input() rows: number;
@@ -40,7 +41,8 @@ export class PaginatorComponent implements OnInit {
       event.preventDefault();
     }
     this._activePage = page;
-    this.onPageSelect.emit(this.createPageEvent(page));
+    this._pageEvent=this.createPageEvent(page);
+    this.onPageSelect.emit(this._pageEvent);
   }
 
   //============================ Private Methods ============================

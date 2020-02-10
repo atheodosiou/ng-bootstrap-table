@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
 
   data:any[];
   _data:any[];
-  rows:number=5;
+  rows:number=2;
   activePage:number = 1;
 
   tableClasses='table table-striped table-hover table-bordered';
