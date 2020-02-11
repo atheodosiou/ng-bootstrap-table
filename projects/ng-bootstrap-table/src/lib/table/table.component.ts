@@ -34,7 +34,7 @@ export class TableComponent implements OnInit {
   ngOnInit() {
     this.pConfig=new PaginatorConfig();
     this.pConfig.sizing=Sizing.SMALL;
-    this.pConfig.alignment=Alignment.LEFT;
+    this.pConfig.alignment=Alignment.RIGHT;
 
     this.checkInputs();
   }

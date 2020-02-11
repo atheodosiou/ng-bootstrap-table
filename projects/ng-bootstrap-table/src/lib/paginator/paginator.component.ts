@@ -28,7 +28,12 @@ export class PaginatorComponent implements OnInit {
   }
 
   setPage(page: number) {
-    this._activePage = page;
+    if (this._activePage !== page) {
+      this._activePage = page;
+      this.onPageChange.emit(this.createPageEvent(page));
+    }
+  }
+  setLastPages(page:number){
     this.onPageChange.emit(this.createPageEvent(page));
   }
 
