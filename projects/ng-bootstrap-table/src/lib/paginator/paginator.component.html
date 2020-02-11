@@ -1,8 +1,49 @@
-<nav *ngIf="_pages && hidePaginator!==true">
-  <ul class="pagination pagination-sm">
-      <li  class="page-item" *ngFor="let page of _pages; let i=index"
-      [ngClass]="{'active':(i+1)==_activePage}">
-        <a class="page-link" (click)="setPage(page.number,$event)">{{page.number}}</a>
+<div class="d-flex w-100">
+  <ng-container *ngTemplateOutlet="totalPages?.length<10?default:extended"></ng-container>
+</div>
+
+<ng-template #default>
+  <nav>
+    <ul class="pagination" 
+      [class.pagination-sm]="_config?.sizing==='pagination-sm'"
+      [class.pagination-lg]="_config?.sizing==='pagination-lg'"
+      [class.justify-content-start]="_config?.alignment==='justify-content-start'"
+      [class.justify-content-center]="_config?.alignment==='justify-content-center'"
+      [class.justify-content-end]="_config?.alignment==='justify-content-end'"
+      >
+      <li class="page-item" *ngFor="let page of _pages;let i = index;"
+      [ngClass]="{'active':(i+1)===_activePage}">
+      <a class="page-link" (click)="setPage(page.number)">{{page.number}}</a>
+    </li>
+    </ul>
+  </nav>
+</ng-template>
+
+
+<ng-template #extended>
+  <nav>
+    <ul class="pagination"
+    [class.pagination-sm]="_config?.sizing==='pagination-sm'"
+    [class.pagination-lg]="_config?.sizing==='pagination-lg'"
+    [class.justify-content-start]="_config?.alignment==='justify-content-start'"
+    [class.justify-content-center]="_config?.alignment==='justify-content-center'"
+    [class.justify-content-end]="_config?.alignment==='justify-content-end'"
+    >
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
       </li>
-  </ul>
-</nav>
+      <li class="page-item"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+        <a class="page-link" href="#" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</ng-template>

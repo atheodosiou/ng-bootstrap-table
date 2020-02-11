@@ -9,6 +9,7 @@ import { BTableColumn } from '../models/table-columns.interface';
 export class TableComponent implements OnInit {
 
   constructor() { }
+  pConfig:PaginatorConfig;
 
   // Input properties
   @Input() columns:BTableColumn[];
@@ -31,6 +32,10 @@ export class TableComponent implements OnInit {
   @Output() onPageChange:EventEmitter<any>=new EventEmitter<any>();
 
   ngOnInit() {
+    this.pConfig=new PaginatorConfig();
+    this.pConfig.sizing=Sizing.SMALL;
+    this.pConfig.alignment=Alignment.CENTER;
+
     this.checkInputs();
   }
 
@@ -46,10 +51,13 @@ export class TableComponent implements OnInit {
     }
   }
 
-  onPageSelect(page:number){
-    if(this.paginator){
-      this.onPageChange.emit(page)
-    }
+  // onPageSelect(page:number){
+  //   if(this.paginator){
+  //     this.onPageChange.emit(page)
+  //   }
+  // }
+  onPageSelect(page){
+    console.log(page)
   }
 
   private checkInputs(){
@@ -70,6 +78,8 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from '../paginator/paginator.module';
+import { PaginatorConfig, Sizing, Alignment } from '../models/paginator.model';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   imports:[
