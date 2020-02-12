@@ -1,26 +1,9 @@
 <div *ngIf="_pages?.length" class="d-flex w-100">
-  <ng-container *ngTemplateOutlet="_pages?.length<10?default:test"></ng-container>
+  <ng-container *ngTemplateOutlet="paginator_template"></ng-container>
 </div>
 
-<ng-template #default>
-  <nav>
-    <ul class="pagination" 
-      [class.pagination-sm]="_config?.sizing==='pagination-sm'"
-      [class.pagination-lg]="_config?.sizing==='pagination-lg'"
-      [class.justify-content-start]="_config?.alignment==='justify-content-start'"
-      [class.justify-content-center]="_config?.alignment==='justify-content-center'"
-      [class.justify-content-end]="_config?.alignment==='justify-content-end'"
-      >
-      <li class="page-item" *ngFor="let page of _pages;let i = index;"
-      [ngClass]="{'active':(i+1)===_activePage}">
-      <a class="page-link" (click)="setPage(page.number)">{{page.number}}</a>
-    </li>
-    </ul>
-  </nav>
-</ng-template>
 
-
-<ng-template #extended>
+<!-- <ng-template #default>
   <nav>
     <ul class="pagination"
     [class.pagination-sm]="_config?.sizing==='pagination-sm'"
@@ -77,21 +60,10 @@
       </li>
     </ul>
   </nav>
-</ng-template>
+</ng-template> -->
 
-<ng-template #test>
-  <!-- <div class="input-group">
-    <select class="custom-select" id="inputGroupSelect04">
-      <option selected>Choose...</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
-    <div class="input-group-append">
-      <button class="btn btn-outline-secondary" type="button">Button</button>
-    </div>
-  </div> -->
-  <nav aria-label="...">
+<ng-template #paginator_template>
+  <nav aria-label="paginator">
     <ul class="pagination"
     [class.pagination-sm]="_config?.sizing==='pagination-sm'"
     [class.pagination-lg]="_config?.sizing==='pagination-lg'"

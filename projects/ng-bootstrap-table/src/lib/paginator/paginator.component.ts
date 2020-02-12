@@ -29,12 +29,10 @@ export class PaginatorComponent implements OnInit {
 
   setPage(page: number) {
     if (this._activePage !== page) {
+      console.log(page)
       this._activePage = page;
       this.onPageChange.emit(this.createPageEvent(page));
     }
-  }
-  setLastPages(page:number){
-    this.onPageChange.emit(this.createPageEvent(page));
   }
 
   private initPaginator() {
@@ -60,9 +58,7 @@ export class PaginatorComponent implements OnInit {
   private createPages(totalPages: number) {
     this._pages = [];
     for (let i = 1; i <= totalPages; i++) {
-      this._pages.push({
-        number: i
-      })
+      this._pages.push(this.createPageEvent(i));
     }
   }
 

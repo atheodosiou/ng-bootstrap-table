@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BTableColumn } from '../../projects/ng-bootstrap-table/src/lib/models/table-columns.interface';
 import { HttpClient } from '@angular/common/http';
+import { PaginatorConfig, Sizing, Alignment } from 'projects/ng-bootstrap-table/src/public-api';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +22,19 @@ export class AppComponent implements OnInit {
 
   data:any[];
   _data:any[];
-  rows:number=2;
+  rows:number=5;
   activePage:number = 1;
 
   tableClasses='table table-striped table-hover table-bordered';
   theadClasses='';
+
+  pConfig:PaginatorConfig;
   
   ngOnInit(){
+    this.pConfig= new PaginatorConfig();
+    this.pConfig.sizing = Sizing.SMALL;
+    this.pConfig.alignment= Alignment.CENTER;
+
     this.http.get('https://jsonplaceholder.typicode.com/users')
     .subscribe((users:any[])=>{
       this._data=users;
@@ -40,7 +47,7 @@ export class AppComponent implements OnInit {
   }
 
   onPageChange(event){
-    
+    console.log(event)
     this.data= this.paginate(this._data,event.rowsPerPage,event.activePage);
     console.log(event,this.data);
   }
