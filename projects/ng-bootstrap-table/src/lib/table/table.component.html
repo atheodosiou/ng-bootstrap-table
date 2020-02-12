@@ -15,7 +15,6 @@
   </table>
 </div>
 <div class="b-table-paginator-container" *ngIf="paginator && rows>0 && value?.length>0">
-  <b-paginator [totalRecords]="totalRecords" [rows]="rows"
-    (onPageSelect)="onPageSelect($event)">
+  <b-paginator [totalRecords]="totalRecords" [rows]="rows" [config]="pConfig" (onPageChange)="onPageSelect($event)">
   </b-paginator>
 </div>

@@ -9,6 +9,7 @@ import { BTableColumn } from '../models/table-columns.interface';
 export class TableComponent implements OnInit {
 
   constructor() { }
+  pConfig:PaginatorConfig;
 
   // Input properties
   @Input() columns:BTableColumn[];
@@ -23,6 +24,7 @@ export class TableComponent implements OnInit {
   @Input() scrollable:boolean = false;
   @Input() scrollHeight:string;
   @Input() rowHeight:string;
+  @Input() paginatorConfig:PaginatorConfig;
   // @Input() selectedRowClass:string='table-primary'
   // @Input() scrollable:boolean=false;
 
@@ -31,9 +33,13 @@ export class TableComponent implements OnInit {
   @Output() onPageChange:EventEmitter<any>=new EventEmitter<any>();
 
   ngOnInit() {
+   if(this.paginator){
+     this.initializePaginator();
+   }
     this.checkInputs();
   }
 
+  //========================================> SELECTION <========================================
   onRowClicked(event:any){
     this.value.forEach(row=>{
       if(row.selected){
@@ -46,9 +52,20 @@ export class TableComponent implements OnInit {
     }
   }
 
-  onPageSelect(page:number){
-    if(this.paginator){
-      this.onPageChange.emit(page)
+  onPageSelect(page){
+    console.log(page)
+    this.onPageChange.emit(page);
+  }
+
+  //========================================> INTERNAL FUNCTIONS <========================================
+  private initializePaginator(){
+    if(!this.paginatorConfig){
+      //Default configuration
+      this.pConfig=new PaginatorConfig();
+      this.pConfig.sizing=Sizing.SMALL;
+      this.pConfig.alignment=Alignment.RIGHT;
+    }else{
+      this.pConfig = this.paginatorConfig;
     }
   }
 
@@ -70,6 +87,7 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from '../paginator/paginator.module';
+import { PaginatorConfig, Sizing, Alignment } from '../models/paginator.model';
 
 @NgModule({
   imports:[

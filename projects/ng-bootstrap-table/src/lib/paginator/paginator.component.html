@@ -1,8 +1,102 @@
-<nav *ngIf="_pages && hidePaginator!==true">
-  <ul class="pagination pagination-sm">
-      <li  class="page-item" *ngFor="let page of _pages; let i=index"
-      [ngClass]="{'active':(i+1)==_activePage}">
-        <a class="page-link" (click)="setPage(page.number,$event)">{{page.number}}</a>
+<div *ngIf="_pages?.length" class="d-flex w-100">
+  <ng-container *ngTemplateOutlet="paginator_template"></ng-container>
+</div>
+
+
+<!-- <ng-template #default>
+  <nav>
+    <ul class="pagination"
+    [class.pagination-sm]="_config?.sizing==='pagination-sm'"
+    [class.pagination-lg]="_config?.sizing==='pagination-lg'"
+    [class.justify-content-start]="_config?.alignment==='justify-content-start'"
+    [class.justify-content-center]="_config?.alignment==='justify-content-center'"
+    [class.justify-content-end]="_config?.alignment==='justify-content-end'"
+    >
+    <li class="page-item" [class.disabled]="_activePage===1">
+      <a class="page-link" href="#" aria-label="Previous" (click)="_activePage=1">
+        <span aria-hidden="true"><<</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+      <li class="page-item" [class.disabled]="_activePage===1">
+        <a class="page-link" href="#" aria-label="Previous" (click)="setPage(_activePage-1)">
+          <span aria-hidden="true"><</span>
+          <span class="sr-only">Previous</span>
+        </a>
       </li>
-  </ul>
-</nav>
+      <li class="page-item">
+        <a *ngIf="_activePage!==(_pages.length-2)" class="page-link" (click)="setPage(_pages[_activePage-1].number)">{{_pages[_activePage-1].number}}</a>
+        <a *ngIf="_activePage===(_pages.length-2)" class="page-link" (click)="setLastPages(_pages[_activePage-1].number)">{{_pages[_activePage-1].number}}</a>
+      </li>
+
+      <li class="page-item">
+        <a *ngIf="_activePage!==(_pages.length-2)" class="page-link" (click)="setPage(_pages[_activePage].number)">{{_pages[_activePage].number}}</a>
+        <a *ngIf="_activePage===(_pages.length-2)" class="page-link" (click)="setLastPages(_pages[_activePage].number)">{{_pages[_activePage].number}}</a>
+      </li>
+      
+      <li class="page-item">
+        <a *ngIf="_activePage!==(_pages.length-2)" class="page-link" (click)="setPage(_pages[_activePage+1].number)">{{_pages[_activePage+1].number}}</a>
+        <a *ngIf="_activePage===(_pages.length-2)" class="page-link" (click)="setLastPages(_pages[_activePage+1].number)">{{_pages[_activePage+1].number}}</a>
+      </li>
+      
+      <li class="page-item disabled" *ngIf="_activePage!==(_pages.length-2) && _activePage!==(_pages.length-1) && _activePage!==(_pages.length)"><a class="page-link" (click)="setPage(_pages[_activePage+1].number)">...</a></li>
+      <li class="page-item"*ngIf="_activePage!==(_pages.length-2) && _activePage!==(_pages.length-1) && _activePage!==(_pages.length)"><a class="page-link" (click)="setPage(_pages[_activePage+1].number)">{{_pages[_pages.length-2].number}}</a></li>
+      <li class="page-item" *ngIf="_activePage!==(_pages.length-2) && _activePage!==(_pages.length-1) && _activePage!==(_pages.length)">
+        <a class="page-link" (click)="setPage(_pages[_activePage+1].number)">
+          {{_pages[_pages.length-1].number}}
+        </a>
+      </li>
+      <li class="page-item" [class.disabled]="_activePage===(_pages.length-2)">
+        <a class="page-link" href="#" aria-label="Next" (click)="setPage(_activePage+1)">
+          <span aria-hidden="true">></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+      <li class="page-item" [class.disabled]="_activePage===(_pages.length - 2)">
+        <a class="page-link" href="#" aria-label="Next" (click)="_activePage=_pages.length">
+          <span aria-hidden="true">>></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</ng-template> -->
+
+<ng-template #paginator_template>
+  <nav aria-label="paginator">
+    <ul class="pagination"
+    [class.pagination-sm]="_config?.sizing==='pagination-sm'"
+    [class.pagination-lg]="_config?.sizing==='pagination-lg'"
+    [class.justify-content-start]="_config?.alignment==='justify-content-start'"
+    [class.justify-content-center]="_config?.alignment==='justify-content-center'"
+    [class.justify-content-end]="_config?.alignment==='justify-content-end'"
+    >
+    <li class="page-item" [class.disabled]="_activePage===1">
+      <a class="page-link" href="#" aria-label="Previous" (click)="setPage(1)">
+        <span aria-hidden="true">First</span>
+        <span class="sr-only">Previous</span>
+      </a>
+    </li>
+    <li class="page-item" [class.disabled]="_activePage===1">
+      <a class="page-link" href="#" aria-label="Previous" (click)="setPage(_activePage-1)">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+      <li class="page-item">
+        <span class="page-link" style="color: black;">
+          Page <span style="font-weight: bold;">{{_activePage}}</span> from {{_pages?.length}}
+        </span>
+      </li>
+      <li class="page-item" [class.disabled]="_activePage===_pages.length">
+        <a class="page-link" href="#" aria-label="Next" (click)="setPage(_activePage+1)">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+      <li class="page-item" [class.disabled]="_activePage===_pages.length">
+        <a class="page-link" href="#" aria-label="Next" (click)="setPage(_pages.length)">
+          <span aria-hidden="true">Last</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</ng-template>
