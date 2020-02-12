@@ -121,8 +121,8 @@ List of events
 
 Event | Parameters | Description
 --- | --- | ---
-onRowSelect | Object | Callback to invoke when a row is selected.
-onPageChange | Object | Callback to invoke when a page is changed.
+onRowSelect | Object | Callback to be invoked when a row is selected.
+onPageChange | PageEvent | Callback to be invoked when a page is changed.
 
 
 ### Event parameters
@@ -191,4 +191,3 @@ Feel free to contribute and/or report a bug at the [GitHub Repository](https://g
 
 ### License
 ng-bootstrap-table is released under the Apache license.
- 
