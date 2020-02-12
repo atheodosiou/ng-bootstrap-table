@@ -1,4 +1,4 @@
-![Travis (.com)](https://img.shields.io/travis/com/atheodosiou/ng-bootstrap-table) ![npm](https://img.shields.io/npm/dw/ng-bootstrap-table) ![npm](https://img.shields.io/npm/v/ng-bootstrap-table)
+![Travis (.com)](https://img.shields.io/travis/com/atheodosiou/ng-bootstrap-table) ![npm](https://img.shields.io/npm/dw/ng-bootstrap-table) ![npm](https://img.shields.io/npm/v/ng-bootstrap-table) ![GitHub stars](https://img.shields.io/github/stars/atheodosiou/ng-bootstrap-table?style=social) ![GitHub forks](https://img.shields.io/github/forks/atheodosiou/ng-bootstrap-table?style=social)
 
 # ng-bootstrap-table *(WIP)*
 ![new_paginator](https://user-images.githubusercontent.com/20326000/74380557-7e067c00-4df2-11ea-9d29-4d0fb9a1288a.png)
