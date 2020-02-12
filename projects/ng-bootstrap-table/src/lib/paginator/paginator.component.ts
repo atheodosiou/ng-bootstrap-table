@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
-import { PaginatorConfig, PaginatorPage } from '../models/paginator.model';
+import { PaginatorConfig, PaginatorPage, PageEvent } from '../models/paginator.model';
 
 @Component({
   selector: 'b-paginator',
@@ -11,7 +11,7 @@ export class PaginatorComponent implements OnInit {
 
   _first: number = 0;
   _config: PaginatorConfig;
-  _pages: any[];
+  _pages: PageEvent[];
   _activePage: number = 1;
   _paginatorState: any;
 
@@ -21,7 +21,7 @@ export class PaginatorComponent implements OnInit {
     this._config = config;
   }
 
-  @Output() onPageChange: EventEmitter<any> = new EventEmitter<any>();
+  @Output() onPageChange: EventEmitter<PageEvent> = new EventEmitter<PageEvent>();
 
   ngOnInit() {
     this.initPaginator();
@@ -29,7 +29,6 @@ export class PaginatorComponent implements OnInit {
 
   setPage(page: number) {
     if (this._activePage !== page) {
-      console.log(page)
       this._activePage = page;
       this.onPageChange.emit(this.createPageEvent(page));
     }
@@ -40,7 +39,6 @@ export class PaginatorComponent implements OnInit {
       throw new Error('You must provide \'rows\' and \'totalRecords\' parameters!')
     }
     this.createPages(this.getTotalPages());
-    console.log(this._pages);
   }
 
   private rowsAndTotalRecordsExists(): boolean {
@@ -62,8 +60,8 @@ export class PaginatorComponent implements OnInit {
     }
   }
 
-  private createPageEvent(page: number): any {
-    let pageEvent = {
+  private createPageEvent(page: number): PageEvent {
+    let pageEvent:PageEvent = {
       nextPage: page < this.getTotalPages() ? page + 1 : page == this.getTotalPages() ? null : this.getTotalPages() - 1,
       activePage: page,
       previousPage: page !== 0 && page < this.getTotalPages() ? page - 1 : page == 0 ? null : page == 0 ? null : this.getTotalPages() - 1,
