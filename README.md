@@ -1,7 +1,8 @@
 ![Travis (.com)](https://img.shields.io/travis/com/atheodosiou/ng-bootstrap-table) ![npm](https://img.shields.io/npm/dw/ng-bootstrap-table) ![npm](https://img.shields.io/npm/v/ng-bootstrap-table)
 
 # ng-bootstrap-table *(WIP)*
-![table-ligth](https://user-images.githubusercontent.com/20326000/73258331-264efa80-41ce-11ea-9d31-03559632616c.png)
+![new_paginator](https://user-images.githubusercontent.com/20326000/74380557-7e067c00-4df2-11ea-9d29-4d0fb9a1288a.png)
+
 
 ## A lightweight, bootstrap styled Angular data table component!
 ### Prerequisites:
@@ -50,6 +51,7 @@ export class AppModule { }
   [value]="data" 
   [responsive]="true"
   [paginator]="true"
+  [paginatorConfig]="pConfig"
   [rows]="rows"
   [totalRecords]="_data.length"
   [tableClasses]="tableClasses"
@@ -80,6 +82,22 @@ Ng-bootstrap-table also supports scrollable behaviour. If you need so, you must 
     {header:'Website',field:'website'}
   ];
   ```
+### Paginator configuration
+Alternatively, you can configure the paginator by providing a ``` PaginatorConfig ``` object in the paginatorConfig attribute of ```b-table```. 
+With this you will be abple to adjust to paginator sizing and alignment.
+
+```javascript
+export class PaginatorConfig {
+    sizing: Sizing;
+    alignment: Alignment = Alignment.RIGHT;
+}
+```
+For example: 
+```javascript 
+    this.pConfig= new PaginatorConfig();
+    this.pConfig.sizing = Sizing.SMALL;
+    this.pConfig.alignment= Alignment.CENTER;
+```
 ### Documentation
 List of all supported properties which must/can be used with b-table.
 
@@ -92,6 +110,7 @@ scrollable | boolean | false | Defines if the table should have a scrollable bod
 scrollHeight | string | null | Defines the scroll height of the table body.
 rowHeight | string | null | Defines the row height of the table body.
 paginator | boolean | false | Defines if the table should be have a paginator or not.
+paginatorConfig | PaginatorConfig | Alignment.RIGHT | Provides configuration for the paginator.
 rows | number | null | Defines the total number of rows per page in the table.
 totalRecords | number | null | The total number of `value` entries.
 tableClasses | string | null | Bootstrap classes to be applied on `<table>` tag.
@@ -107,7 +126,7 @@ onPageChange | Object | Callback to invoke when a page is changed.
 
 
 ### Event parameters
-onRowSelect: Returns an object with the following stracture.
+onRowSelect: Returns a ``` PageEvent ``` with the following stracture.
 
 ```Javascript 
 {

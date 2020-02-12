@@ -6,3 +6,8 @@
 ### Version 0.0.6
 + #### 11/02/2020
   + Tests added for table and paginator components 
+### Version 0.0.7
++ #### 13/02/2020
+  + Refactor paginator
+  + Added interfaces for PageEvent and PaginatorConfig
+  + Paginator tests updated
