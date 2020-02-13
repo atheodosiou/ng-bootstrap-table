@@ -1,20 +1,15 @@
 <div class="container">
   <p class="text-center font-weight-bold">Bootstrap Data Table Demo</p>
-  <b-table [striped]="true" [bordered]="true" [hover]="true" [small]="true">
+  
+  <b-table *ngIf="data" [value]="data" [striped]="true" [bordered]="true" [hover]="true" [small]="true">
    <ng-template bTemplate="header">
      <tr>
-       <th>Header</th>
+       <th *ngFor="let col of columns">{{col.header}}</th>
      </tr>
     </ng-template>
-    <ng-template bTemplate="body">
+    <ng-template bTemplate="body" let-rowData>
       <tr>
-        <td>Row 1</td>
-      </tr>
-      <tr>
-        <td>Row 2</td>
-      </tr>
-      <tr>
-        <td>Row 3</td>
+        <td *ngFor="let col of columns">{{rowData[col.field]}}</td>
       </tr>
      </ng-template>
   </b-table>
