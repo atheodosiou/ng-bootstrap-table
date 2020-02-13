@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ContentChild, TemplateRef, HostBinding, ElementRef, Renderer2, ViewChild, AfterViewInit, ViewChildren } from '@angular/core';
 import { BTableColumn } from '../models/table-columns.interface';
 
 @Component({
@@ -7,79 +7,96 @@ import { BTableColumn } from '../models/table-columns.interface';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
+  @ContentChild(BHeaderDirective, { static: true, read: TemplateRef }) header: TemplateRef<any>;
+  @ContentChild(BBodyDirective, { static: true, read: TemplateRef }) body: TemplateRef<any>;
 
-  constructor() { }
-  pConfig:PaginatorConfig;
+  @Input() striped: boolean;
+  @Input() bordered: boolean;
+  @Input() borderless: boolean;
+  @Input() hover: boolean;
+  @Input() small: boolean;
+  @Input() responsive: boolean;
+  @Input() stickyHeader = false;
+  @Input() stickyHeaderBgColor = '';
+  @Input() stickyHeaderTextColor = '';
 
-  // Input properties
-  @Input() columns:BTableColumn[];
-  @Input() value:any[];
-  @Input() responsive:boolean=true;
-  @Input() paginator:boolean=false;
-  @Input() rows:number;
-  @Input() totalRecords:number;
-  @Input() tableClasses:string='table';
-  @Input() theadClasses:string='';
-  @Input() trClasses:string=''
-  @Input() scrollable:boolean = false;
-  @Input() scrollHeight:string;
-  @Input() rowHeight:string;
-  @Input() paginatorConfig:PaginatorConfig;
-  // @Input() selectedRowClass:string='table-primary'
-  // @Input() scrollable:boolean=false;
-
-  //Output events
-  @Output() onRowSelect:EventEmitter<any>=new EventEmitter<any>();
-  @Output() onPageChange:EventEmitter<any>=new EventEmitter<any>();
-
+  constructor() {}
+  
   ngOnInit() {
-   if(this.paginator){
-     this.initializePaginator();
-   }
-    this.checkInputs();
+    console.log('Table works');
   }
+  // constructor() { }
+  // pConfig:PaginatorConfig;
 
-  //========================================> SELECTION <========================================
-  onRowClicked(event:any){
-    this.value.forEach(row=>{
-      if(row.selected){
-        row.selected=false;
-      }
-    })
-    event.selected=true;
-    if(event){
-      this.onRowSelect.emit(event);
-    }
-  }
+  // // Input properties
+  // @Input() columns:BTableColumn[];
+  // @Input() value:any[];
+  // @Input() responsive:boolean=true;
+  // @Input() paginator:boolean=false;
+  // @Input() rows:number;
+  // @Input() totalRecords:number;
+  // @Input() tableClasses:string='table';
+  // @Input() theadClasses:string='';
+  // @Input() trClasses:string=''
+  // @Input() scrollable:boolean = false;
+  // @Input() scrollHeight:string;
+  // @Input() rowHeight:string;
+  // @Input() paginatorConfig:PaginatorConfig;
+  // // @Input() selectedRowClass:string='table-primary'
+  // // @Input() scrollable:boolean=false;
 
-  onPageSelect(page){
-    console.log(page)
-    this.onPageChange.emit(page);
-  }
+  // //Output events
+  // @Output() onRowSelect:EventEmitter<any>=new EventEmitter<any>();
+  // @Output() onPageChange:EventEmitter<any>=new EventEmitter<any>();
 
-  //========================================> INTERNAL FUNCTIONS <========================================
-  private initializePaginator(){
-    if(!this.paginatorConfig){
-      //Default configuration
-      this.pConfig=new PaginatorConfig();
-      this.pConfig.sizing=Sizing.SMALL;
-      this.pConfig.alignment=Alignment.RIGHT;
-    }else{
-      this.pConfig = this.paginatorConfig;
-    }
-  }
+  // ngOnInit() {
+  //  if(this.paginator){
+  //    this.initializePaginator();
+  //  }
+  //   this.checkInputs();
+  // }
 
-  private checkInputs(){
-    if(!this.columns || !this.value){
-      throw new Error('Missing required properties! \'columns\' and \'value\' must be provided.')
-    }
+  // //========================================> SELECTION <========================================
+  // onRowClicked(event:any){
+  //   this.value.forEach(row=>{
+  //     if(row.selected){
+  //       row.selected=false;
+  //     }
+  //   })
+  //   event.selected=true;
+  //   if(event){
+  //     this.onRowSelect.emit(event);
+  //   }
+  // }
 
-    if(this.paginator === true){
-      if(!this.rows || !this.totalRecords){
-        throw new Error('Missing required properties! \'rows\' and \'totalRecords\' must be provided if \'paginator\' is true.')
-      }
-    }
-  }
+  // onPageSelect(page){
+  //   console.log(page)
+  //   this.onPageChange.emit(page);
+  // }
+
+  // //========================================> INTERNAL FUNCTIONS <========================================
+  // private initializePaginator(){
+  //   if(!this.paginatorConfig){
+  //     //Default configuration
+  //     this.pConfig=new PaginatorConfig();
+  //     this.pConfig.sizing=Sizing.SMALL;
+  //     this.pConfig.alignment=Alignment.RIGHT;
+  //   }else{
+  //     this.pConfig = this.paginatorConfig;
+  //   }
+  // }
+
+  // private checkInputs(){
+  //   if(!this.columns || !this.value){
+  //     throw new Error('Missing required properties! \'columns\' and \'value\' must be provided.')
+  //   }
+
+  //   if(this.paginator === true){
+  //     if(!this.rows || !this.totalRecords){
+  //       throw new Error('Missing required properties! \'rows\' and \'totalRecords\' must be provided if \'paginator\' is true.')
+  //     }
+  //   }
+  // }
 }
 
 
@@ -88,14 +105,16 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from '../paginator/paginator.module';
 import { PaginatorConfig, Sizing, Alignment } from '../models/paginator.model';
+import { BHeaderDirective } from '../directives/b-header.directive';
+import { BBodyDirective } from '../directives/b-body.directive';
 
 @NgModule({
-  imports:[
+  imports: [
     CommonModule,
     FormsModule,
     PaginatorModule
   ],
-  exports:[TableComponent],
-  declarations:[TableComponent]
+  exports: [TableComponent],
+  declarations: [TableComponent]
 })
-export class BootstrapTableModule{}
+export class BootstrapTableModule { }

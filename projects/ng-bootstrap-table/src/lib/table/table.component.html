@@ -1,4 +1,20 @@
-<div class="b-table-container" [ngClass]="{'table-responsive': responsive, 'b-table-fixed-head':scrollable}" 
+  <table *ngIf="header" class="table"
+    [class.table-striped]="striped"
+    [class.table-bordered]="bordered"
+    [class.table-borderless]="borderless"
+    [class.table-hover]="hover"
+    [class.table-sm]="small"
+    [class.table-responsive]="responsive"
+  >
+    <!-- <ng-content></ng-content> -->
+    <thead>
+      <ng-container [ngTemplateOutlet]="header"></ng-container>
+    </thead>
+    <tbody>
+      <ng-container [ngTemplateOutlet]="body"></ng-container>
+    </tbody>
+  </table>
+<!-- <div class="b-table-container" [ngClass]="{'table-responsive': responsive, 'b-table-fixed-head':scrollable}" 
   [ngStyle]="{height:scrollable?scrollHeight:''}">
   <table [ngClass]="tableClasses">
     <thead *ngIf="columns?.length>0" [ngClass]="theadClasses">
@@ -17,4 +33,4 @@
 <div class="b-table-paginator-container" *ngIf="paginator && rows>0 && value?.length>0">
   <b-paginator [totalRecords]="totalRecords" [rows]="rows" [config]="pConfig" (onPageChange)="onPageSelect($event)">
   </b-paginator>
-</div>
+</div> -->

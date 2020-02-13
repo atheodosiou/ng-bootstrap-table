@@ -1,6 +1,24 @@
 <div class="container">
   <p class="text-center font-weight-bold">Bootstrap Data Table Demo</p>
-  <b-table 
+  <b-table [striped]="true" [bordered]="true" [hover]="true" [small]="true">
+   <ng-template bTemplate="header">
+     <tr>
+       <th>Header</th>
+     </tr>
+    </ng-template>
+    <ng-template bTemplate="body">
+      <tr>
+        <td>Row 1</td>
+      </tr>
+      <tr>
+        <td>Row 2</td>
+      </tr>
+      <tr>
+        <td>Row 3</td>
+      </tr>
+     </ng-template>
+  </b-table>
+  <!-- <b-table 
   *ngIf="_data"
   [columns]="columns" 
   [value]="data" 
@@ -13,6 +31,6 @@
   [theadClasses]="theadClasses"
   (onRowSelect)="onRowSelect($event)"
   (onPageChange)="onPageChange($event)"
-  ></b-table>
+  ></b-table> -->
 </div>
 <!-- [scrollable]="true" -->
