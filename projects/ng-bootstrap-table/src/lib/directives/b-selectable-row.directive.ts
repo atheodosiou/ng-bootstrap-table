@@ -1,13 +1,10 @@
-import { Directive, Input, OnInit, HostListener } from '@angular/core';
+import { Directive, Input, OnInit, HostListener, Renderer2, ElementRef, Output, EventEmitter } from '@angular/core';
 import { BTableService } from '../services/b-table.service';
 
 @Directive({
   selector: '[bSelectableRow]'
 })
 export class BSelectableRowDirective {
-
-  constructor(private bTableService: BTableService) { }
-  
   private prevRowData: any;
 
   @Input() bSelectableRow: any;
@@ -16,6 +13,9 @@ export class BSelectableRowDirective {
   onClick() {
     this.selectUnSelectRow();
   }
+
+  constructor(private bTableService: BTableService) {}
+
 
   private selectUnSelectRow() {
     if (!this.prevRowData) {

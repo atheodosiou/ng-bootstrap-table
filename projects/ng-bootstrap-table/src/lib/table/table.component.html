@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <ng-container *ngFor="let item of value">
-        <ng-container *ngTemplateOutlet="body;context: { $implicit: item }"></ng-container>
+        <ng-container #body *ngTemplateOutlet="body;context: { $implicit: item }"></ng-container>
       </ng-container>
     </tbody>
   </table>

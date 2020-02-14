@@ -10,7 +10,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent implements OnInit {
   constructor(private http:HttpClient){}
-
+  selectedRow:any;
+  
   title = 'bDataTableDemo';
   columns:BTableColumn[]=[
     {header:'Name',field:'name'},
@@ -49,7 +50,7 @@ export class AppComponent implements OnInit {
   onRowUnselect(event){
     console.log(event);
   }
-  
+
   onPageChange(event){
     console.log(event)
     this.data= this.paginate(this._data,event.rowsPerPage,event.activePage);

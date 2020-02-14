@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,ContentChild, TemplateRef, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input,ContentChild, TemplateRef, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 
 @Component({
   selector: 'b-table',
@@ -27,6 +27,7 @@ export class TableComponent implements OnInit {
 
   @Output() onRowSelect:EventEmitter<any>;
   @Output() onRowUnselect:EventEmitter<any>;
+
 
   constructor(private bTableService:BTableService) {
     this.onRowSelect = new EventEmitter<any>();

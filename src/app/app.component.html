@@ -11,8 +11,8 @@
   [bordered]="true" 
   [hover]="true" 
   [small]="true"
-  (onRowSelect)="onRowSelect($event)"
-  (onRowUnselect)="onRowUnselect($event)"
+  (onRowSelect)="selectedRow=$event;onRowSelect($event)"
+  (onRowUnselect)="selectedRow=$event;onRowUnselect($event)"
   >
    <ng-template bTemplate="header">
      <tr>
@@ -20,7 +20,7 @@
      </tr>
     </ng-template>
     <ng-template bTemplate="body" let-rowData>
-      <tr [bSelectableRow]="rowData">
+      <tr [bSelectableRow]="rowData" [class.table-active]="selectedRow===rowData">
         <td *ngFor="let col of columns">{{rowData[col.field]}}</td>
       </tr>
      </ng-template>
