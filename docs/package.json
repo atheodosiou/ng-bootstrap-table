@@ -1,0 +1,40 @@
+{
+  "version": "0.0.9",
+  "name": "ng-bootstrap-table",
+  "description": "A lightweight, bootstrap styled Angular data table component!",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Anastasios Theodosiou",
+    "url": "http://anastasios.theodosiou.me",
+    "email": "anastasios.theodosiou@gmail.com"
+  },
+  "repository": {
+    "url": "https://github.com/atheodosiou/ng-bootstrap-table"
+  },
+  "peerDependencies": {
+    "@angular/common": "^8.2.14",
+    "@angular/core": "^8.2.14"
+  },
+  "keywords": [
+    "ng-bootstrap-table",
+    "angular",
+    "bootstrap",
+    "table",
+    "grid",
+    "light",
+    "fast"
+  ],
+  "main": "bundles/ng-bootstrap-table.umd.js",
+  "module": "fesm5/ng-bootstrap-table.js",
+  "es2015": "fesm2015/ng-bootstrap-table.js",
+  "esm5": "esm5/ng-bootstrap-table.js",
+  "esm2015": "esm2015/ng-bootstrap-table.js",
+  "fesm5": "fesm5/ng-bootstrap-table.js",
+  "fesm2015": "fesm2015/ng-bootstrap-table.js",
+  "typings": "ng-bootstrap-table.d.ts",
+  "metadata": "ng-bootstrap-table.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}
