@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,ContentChild, TemplateRef} from '@angular/core';
+import { Component, OnInit, Input,ContentChild, TemplateRef, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'b-table',
@@ -25,11 +25,21 @@ export class TableComponent implements OnInit {
   @Input() stickyHeaderBgColor = '';
   @Input() stickyHeaderTextColor = '';
 
-  
-  constructor() {}
+  @Output() onRowSelect:EventEmitter<any>;
+  @Output() onRowUnselect:EventEmitter<any>;
+
+  constructor(private bTableService:BTableService) {
+    this.onRowSelect = new EventEmitter<any>();
+    this.onRowUnselect=new EventEmitter<any>();
+  }
   
   ngOnInit() {
-    console.log('Table works');
+    this.bTableService.onRowSelectSubject.subscribe(value=>{
+      this.onRowSelect.emit(value);
+    })
+    this.bTableService.onRowUnselectSubject.subscribe(value=>{
+      this.onRowUnselect.emit(value);
+    })
   }
 }
 
@@ -40,6 +50,7 @@ import { CommonModule } from '@angular/common';
 import { PaginatorModule } from '../paginator/paginator.module';
 import { BHeaderDirective } from '../directives/b-header.directive';
 import { BBodyDirective } from '../directives/b-body.directive';
+import { BTableService } from '../services/b-table.service';
 
 @NgModule({
   imports: [

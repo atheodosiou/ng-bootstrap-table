@@ -1,11 +1,8 @@
-import { Directive, OnInit } from '@angular/core';
+import { Directive } from '@angular/core';
 
 @Directive({
   selector: '[bTemplate="body"]'
 })
-export class BBodyDirective implements OnInit{
+export class BBodyDirective{
   constructor() { }
-  ngOnInit(){
-    console.log('BBodyDirective Works!')
-   }
 }

@@ -1,6 +1,4 @@
 /* tslint:disable:no-unused-variable */
-
-import { TestBed, async } from '@angular/core/testing';
 import { BBodyDirective } from './b-body.directive';
 
 describe('Directive: BBody', () => {
