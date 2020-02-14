@@ -42,6 +42,7 @@ export class TableComponent implements OnInit {
   
   ngOnInit() {
     this.bTableService.onRowSelectSubject.subscribe(value=>{
+      // console.log('table>onRowSelectSubject',value)
       this.onRowSelect.emit(value);
     })
     this.bTableService.onRowUnselectSubject.subscribe(value=>{
@@ -51,7 +52,7 @@ export class TableComponent implements OnInit {
       this.initializePaginator();
     }
      this.checkInputs();
-     console.log(this.paginator,this.rows,this.totalRecords,this.paginatorConfig)
+    //  console.log(this.paginator,this.rows,this.totalRecords,this.paginatorConfig)
   }
 
   onPageSelect(page:PageEvent){
