@@ -6,13 +6,19 @@
   <!-- =============================================================================================================== -->
 
   <b-table *ngIf="data" 
+  [columns]="columns"
   [value]="data" 
   [striped]="true" 
   [bordered]="true" 
   [hover]="true" 
   [small]="true"
+  [paginator]="true"
+  [paginatorConfig]="pConfig"
+  [rows]="rows"
+  [totalRecords]="_data?.length"
   (onRowSelect)="selectedRow=$event;onRowSelect($event)"
   (onRowUnselect)="selectedRow=$event;onRowUnselect($event)"
+  (onPageChange)="onPageChange($event)"
   >
    <ng-template bTemplate="header">
      <tr>

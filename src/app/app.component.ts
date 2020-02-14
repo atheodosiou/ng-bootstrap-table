@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BTableColumn } from '../../projects/ng-bootstrap-table/src/lib/models/table-columns.interface';
 import { HttpClient } from '@angular/common/http';
+import { PageEvent, PaginatorConfig, Sizing, Alignment } from 'projects/ng-bootstrap-table/src/lib/models/paginator.model';
 // import { PaginatorConfig, Sizing, Alignment } from 'projects/ng-bootstrap-table/src/public-api';
 
 @Component({
@@ -11,6 +12,7 @@ import { HttpClient } from '@angular/common/http';
 export class AppComponent implements OnInit {
   constructor(private http:HttpClient){}
   selectedRow:any;
+  pConfig:PaginatorConfig;
   
   title = 'bDataTableDemo';
   columns:BTableColumn[]=[
@@ -23,7 +25,7 @@ export class AppComponent implements OnInit {
 
   data:any[];
   _data:any[];
-  rows:number=5;
+  rows:number=2;
   activePage:number = 1;
 
   tableClasses='table table-striped table-hover table-bordered';
@@ -32,9 +34,9 @@ export class AppComponent implements OnInit {
   // pConfig:PaginatorConfig;
   
   ngOnInit(){
-    // this.pConfig= new PaginatorConfig();
-    // this.pConfig.sizing = Sizing.SMALL;
-    // this.pConfig.alignment= Alignment.CENTER;
+    this.pConfig= new PaginatorConfig();
+    this.pConfig.sizing = Sizing.SMALL;
+    this.pConfig.alignment= Alignment.CENTER;
 
     this.http.get('https://jsonplaceholder.typicode.com/users')
     .subscribe((users:any[])=>{
@@ -51,7 +53,7 @@ export class AppComponent implements OnInit {
     console.log(event);
   }
 
-  onPageChange(event){
+  onPageChange(event:PageEvent){
     console.log(event)
     this.data= this.paginate(this._data,event.rowsPerPage,event.activePage);
     console.log(event,this.data);
