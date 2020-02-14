@@ -24,7 +24,7 @@ Then you have to link the bootstrap.min.css into you styles in your angular.json
             ]
 ```
 
-### Usage: 
+### Installation: 
 Install the [ng-bootstrap-table](https://www.npmjs.com/package/ng-bootstrap-table) package via NPM using the command below:
 ```Javascript
 npm i ng-bootstrap-table
@@ -44,33 +44,23 @@ import { BootstrapTableModule } from 'ng-bootstrap-table';
 })
 export class AppModule { }
 ```
-### Declare the table component into our HTML template
+## Usage examples
+### Dynamic rows and columns
 ```HTML
-  <b-table 
-  [columns]="columns" 
-  [value]="data" 
-  [responsive]="true"
-  [paginator]="true"
-  [paginatorConfig]="pConfig"
-  [rows]="rows"
-  [totalRecords]="_data.length"
-  [tableClasses]="tableClasses"
-  [theadClasses]="theadClasses"
-  (onRowSelect)="onRowSelect($event)"
-  (onPageChange)="onPageChange($event)"
-  ></b-table>
+<b-table [columns]="columns" [value]="data" [striped]="true" [bordered]="true" [small]="true" (onRowUnselect)="selectedRow=$event">
+    <ng-template bTemplate="header">
+      <tr>
+        <th *ngFor="let col of columns">{{col.header}}</th>
+      </tr>
+    </ng-template>
+    <ng-template bTemplate="body" let-rowData>
+      <tr [bSelectableRow]="rowData" [ngClass]="{'table-active':selectedRow?.selected && selectedRow?.data===rowData}">
+        <td *ngFor="let col of columns">{{rowData[col.field]}}</td>
+      </tr>
+    </ng-template>
+  </b-table>
 ```
-### Scrollable Body
-Ng-bootstrap-table also supports scrollable behaviour. If you need so, you must specify the following properties:
-```html
-  <b-table 
-  ...
-  [scrollable]="true"
-  scrollHeight="150px"
-  rowHeight="45px"
-  ...
-  ></b-table>
-  ```
+
 ### Column definition
 
 ```Typescript
@@ -98,6 +88,25 @@ For example:
     this.pConfig.sizing = Sizing.SMALL;
     this.pConfig.alignment= Alignment.CENTER;
 ```
+After that, you have to enable paginator into ``` b-table ``` component like below.
+
+```HTML
+<b-table *ngIf="data" [columns]="columns" [value]="data" [striped]="true" [bordered]="true" [small]="true"
+    [paginator]="true" [paginatorConfig]="pConfig" [rows]="rows" [totalRecords]="_data?.length" [hover]="true"
+    (onRowSelect)="selectedRow=$event;onRowSelect($event)" (onRowUnselect)="selectedRow=$event;onRowUnselect($event)"
+    (onPageChange)="onPageChange($event)">
+    <ng-template bTemplate="header">
+      <tr>
+        <th *ngFor="let col of columns">{{col.header}}</th>
+      </tr>
+    </ng-template>
+    <ng-template bTemplate="body" let-rowData>
+      <tr [bSelectableRow]="rowData" [ngClass]="{'table-active':selectedRow?.selected && selectedRow?.data===rowData}">
+        <td *ngFor="let col of columns">{{rowData[col.field]}}</td>
+      </tr>
+    </ng-template>
+  </b-table>
+```
 ### Documentation
 List of all supported properties which must/can be used with b-table.
 
@@ -105,28 +114,31 @@ Property | Type | Default | Short Description
 --- | --- | --- | ---
 columns | BTableColumn array | null | An array of objects to represent dynamic columns.
 value | array | null | An array of objects to display.
-responsive | boolean | false | Defines if the table should be responsive or not.
-scrollable | boolean | false | Defines if the table should have a scrollable body.
-scrollHeight | string | null | Defines the scroll height of the table body.
-rowHeight | string | null | Defines the row height of the table body.
 paginator | boolean | false | Defines if the table should be have a paginator or not.
 paginatorConfig | PaginatorConfig | Alignment.RIGHT | Provides configuration for the paginator.
 rows | number | null | Defines the total number of rows per page in the table.
 totalRecords | number | null | The total number of `value` entries.
-tableClasses | string | null | Bootstrap classes to be applied on `<table>` tag.
-theadClasses | string | null | Bootstrap classes to be applied on `<thead>` tag.
-trClasses | string | null | Bootstrap classes to be applied on `<tr>` tag.
+striped | boolean | null | Makes table striped by adding the `.table-striped` class.
+bordered | boolean | null | Makes table bordered by adding the `.table-bordered` class.
+borderless | boolean | null | Makes table borderless by adding the `.table-borderless` class.
+small | boolean | null | Makes table small by adding the `.table-sm` class.
+dark | boolean | null | Makes table dark by adding the `.table-dark` class.
+hover | boolean | null | Makes table hoverable by adding the `.table-hover` class.
+headLight | boolean | null | Makes table head light by adding the `.thead-light` class.
+headDark | boolean | null | Makes table head dark by adding the `.thead-dark` class.
+responsive | boolean | false | Makes table responsive by adding the `.table-responsive` class.
 
 List of events
 
 Event | Parameters | Description
 --- | --- | ---
-onRowSelect | Object | Callback to be invoked when a row is selected.
+onRowSelect | BRowEvent | Callback to be invoked when a row is selected.
+onRowUnselect | BRowEvent | Callback to be invoked when a row was unselected.
 onPageChange | PageEvent | Callback to be invoked when a page is changed.
 
 
-### Event parameters
-onRowSelect: Returns a ``` PageEvent ``` with the following stracture.
+### `PageEvent` event format 
+onPageChange: Returns a ``` PageEvent ``` with the following stracture.
 
 ```Javascript 
 {
@@ -140,52 +152,15 @@ onRowSelect: Returns a ``` PageEvent ``` with the following stracture.
   offset: 4
 }
 ```
-onPageChange -->  Object --> Details
+### `BRowEvent` event format 
 
-Returns the selected row with the coresponding data of the value array.
-
-### Styling
-You should just set variables for the b-table properties like below: 
-```Typescript
-tableClasses='table table-striped table-hover table-borderless';
-```
-e.g. A dark table style with borderes...
-![table-dark](https://user-images.githubusercontent.com/20326000/73258335-2818be00-41ce-11ea-94d4-cf0305c154d9.png)
-
- In the same way you can use to theadClasses and trClasses properties in order to customize more your table component.
-
-#### Styling the table haeder
-If you want to change the default style of the table header, you must override the .b-table-header class like below:
-```css
-:host ::ng-deep .b-table-container table .b-table-header{
-    //Default
-    // background-color: whitesmoke;
-    // color: black;
-    background-color: lightblue !important;
-    color: blue !important;
+```Javascript
+{
+    originalEvent:any,
+    data:any,
+    selected:boolean
 }
 ```
-![styling](https://user-images.githubusercontent.com/20326000/74109395-b48e8d80-4b8b-11ea-8263-acf9894d6a46.png)
-
-### Styling the paginator
-In order to change the default style of the paginator, you have to override the .b-table-paginator-container class like below:
-```css
-:host ::ng-deep .b-table-paginator-container {
-    //Default Style
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-    //justify-content: flex-start;
-    justify-content: center !important;
-}
-```
-![paginator-styling](https://user-images.githubusercontent.com/20326000/74109501-9f662e80-4b8c-11ea-8eb9-ed3206c6a6c1.png)
-
-#### Clases
-Class | Default |  Description
---- | --- | ---
-.b-table-header | ```background-color: whitesmoke; color: black;``` | The class which is applied on ```<tr>``` tag of the ```<thead>``` tag. 
-.b-table-paginator-container | ```  display: flex;align-items: center;justify-content: flex-start;``` | The container class of the paginator
 ### Contribution
 Feel free to contribute and/or report a bug at the [GitHub Repository](https://github.com/atheodosiou/ng-bootstrap-table).
 
