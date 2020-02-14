@@ -1,10 +1,17 @@
 import { NgModule } from '@angular/core';
 import { BootstrapTableModule } from './/table/table.component';
+import { BTableDirectivesModule } from './directives/directive.module';
+import { BTableService } from './services/b-table.service';
 
 @NgModule({
   imports: [
-    BootstrapTableModule
+    BootstrapTableModule,
+    BTableDirectivesModule
   ],
-  exports: [BootstrapTableModule]
+  exports: [
+    BootstrapTableModule,
+    BTableDirectivesModule
+  ],
+  providers:[BTableService]
 })
 export class NgBootstrapTableModule { }

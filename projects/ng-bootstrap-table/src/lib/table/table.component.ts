@@ -1,5 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { BTableColumn } from '../models/table-columns.interface';
+import { Component, OnInit, Input,ContentChild, TemplateRef, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
 
 @Component({
   selector: 'b-table',
@@ -7,56 +6,59 @@ import { BTableColumn } from '../models/table-columns.interface';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent implements OnInit {
-
-  constructor() { }
+  //context
+  ctx;
   pConfig:PaginatorConfig;
+  
+  @ContentChild(BHeaderDirective, { static: true, read: TemplateRef }) header: TemplateRef<any>;
+  @ContentChild(BBodyDirective, { static: true, read: TemplateRef }) body: TemplateRef<any>;
 
-  // Input properties
-  @Input() columns:BTableColumn[];
   @Input() value:any[];
-  @Input() responsive:boolean=true;
+  @Input() columns: any[];
+
+  @Input() striped: boolean;
+  @Input() bordered: boolean;
+  @Input() borderless: boolean;
+  @Input() hover: boolean;
+  @Input() small: boolean;
   @Input() paginator:boolean=false;
+  @Input() paginatorConfig:PaginatorConfig;
   @Input() rows:number;
   @Input() totalRecords:number;
-  @Input() tableClasses:string='table';
-  @Input() theadClasses:string='';
-  @Input() trClasses:string=''
-  @Input() scrollable:boolean = false;
-  @Input() scrollHeight:string;
-  @Input() rowHeight:string;
-  @Input() paginatorConfig:PaginatorConfig;
-  // @Input() selectedRowClass:string='table-primary'
-  // @Input() scrollable:boolean=false;
+  @Input() responsive: boolean;
+  @Input() stickyHeader = false;
+  @Input() stickyHeaderBgColor = '';
+  @Input() stickyHeaderTextColor = '';
 
-  //Output events
-  @Output() onRowSelect:EventEmitter<any>=new EventEmitter<any>();
-  @Output() onPageChange:EventEmitter<any>=new EventEmitter<any>();
+  @Output() onRowSelect:EventEmitter<any>;
+  @Output() onRowUnselect:EventEmitter<any>;
+  @Output() onPageChange:EventEmitter<PageEvent>
 
+  constructor(private bTableService:BTableService) {
+    this.onRowSelect = new EventEmitter<any>();
+    this.onRowUnselect=new EventEmitter<any>();
+    this.onPageChange=new EventEmitter<PageEvent>();
+  }
+  
   ngOnInit() {
-   if(this.paginator){
-     this.initializePaginator();
-   }
-    this.checkInputs();
-  }
-
-  //========================================> SELECTION <========================================
-  onRowClicked(event:any){
-    this.value.forEach(row=>{
-      if(row.selected){
-        row.selected=false;
-      }
+    this.bTableService.onRowSelectSubject.subscribe(value=>{
+      // console.log('table>onRowSelectSubject',value)
+      this.onRowSelect.emit(value);
     })
-    event.selected=true;
-    if(event){
-      this.onRowSelect.emit(event);
+    this.bTableService.onRowUnselectSubject.subscribe(value=>{
+      this.onRowUnselect.emit(value);
+    })
+    if(this.paginator){
+      this.initializePaginator();
     }
+     this.checkInputs();
+    //  console.log(this.paginator,this.rows,this.totalRecords,this.paginatorConfig)
   }
 
-  onPageSelect(page){
+  onPageSelect(page:PageEvent){
     console.log(page)
     this.onPageChange.emit(page);
   }
-
   //========================================> INTERNAL FUNCTIONS <========================================
   private initializePaginator(){
     if(!this.paginatorConfig){
@@ -87,15 +89,18 @@ import { NgModule } from "@angular/core";
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PaginatorModule } from '../paginator/paginator.module';
-import { PaginatorConfig, Sizing, Alignment } from '../models/paginator.model';
+import { BHeaderDirective } from '../directives/b-header.directive';
+import { BBodyDirective } from '../directives/b-body.directive';
+import { BTableService } from '../services/b-table.service';
+import { PaginatorConfig, Sizing, Alignment, PageEvent } from '../models/paginator.model';
 
 @NgModule({
-  imports:[
+  imports: [
     CommonModule,
     FormsModule,
     PaginatorModule
   ],
-  exports:[TableComponent],
-  declarations:[TableComponent]
+  exports: [TableComponent],
+  declarations: [TableComponent]
 })
-export class BootstrapTableModule{}
+export class BootstrapTableModule { }

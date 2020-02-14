@@ -1,18 +1,24 @@
 <div class="container">
   <p class="text-center font-weight-bold">Bootstrap Data Table Demo</p>
-  <b-table 
-  *ngIf="_data"
-  [columns]="columns" 
-  [value]="data" 
-  [responsive]="true"
-  [paginator]="true"
-  [paginatorConfig]="pConfig"
-  [rows]="rows"
-  [totalRecords]="_data?.length"
-  [tableClasses]="tableClasses"
-  [theadClasses]="theadClasses"
-  (onRowSelect)="onRowSelect($event)"
-  (onPageChange)="onPageChange($event)"
-  ></b-table>
+
+  <!-- =============================================================================================================== -->
+  <!-- ===============================================> Usage b-table <=============================================== -->
+  <!-- =============================================================================================================== -->
+
+  <b-table *ngIf="data" [columns]="columns" [value]="data" [striped]="true" [bordered]="true" [small]="true"
+    [paginator]="true" [paginatorConfig]="pConfig" [rows]="rows" [totalRecords]="_data?.length"
+    (onRowSelect)="selectedRow=$event;onRowSelect($event)" (onRowUnselect)="selectedRow=$event;onRowUnselect($event)"
+    (onPageChange)="onPageChange($event)">
+    <ng-template bTemplate="header">
+      <tr>
+        <th *ngFor="let col of columns">{{col.header}}</th>
+      </tr>
+    </ng-template>
+    <ng-template bTemplate="body" let-rowData>
+      <tr [bSelectableRow]="rowData" [ngClass]="{'table-active':selectedRow?.selected && selectedRow?.data===rowData}">
+        <td *ngFor="let col of columns">{{rowData[col.field]}}</td>
+      </tr>
+    </ng-template>
+  </b-table>
+
 </div>
-<!-- [scrollable]="true" -->
