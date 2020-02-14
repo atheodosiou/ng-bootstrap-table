@@ -21,6 +21,9 @@ export class TableComponent implements OnInit {
   @Input() borderless: boolean;
   @Input() hover: boolean;
   @Input() small: boolean;
+  @Input() dark:boolean;
+  @Input() headLight:boolean;
+  @Input() headDark:boolean;
   @Input() paginator:boolean=false;
   @Input() paginatorConfig:PaginatorConfig;
   @Input() rows:number;

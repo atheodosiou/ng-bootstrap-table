@@ -5,8 +5,12 @@
     [class.table-hover]="hover"
     [class.table-sm]="small"
     [class.table-responsive]="responsive"
+    [class.table-dark]="dark"
   >
-    <thead>
+    <thead 
+    [class.thead-light]="headLight"
+    [class.thead-dark]="headDark"
+    >
       <ng-container *ngTemplateOutlet="header"></ng-container>
     </thead>
     <tbody>

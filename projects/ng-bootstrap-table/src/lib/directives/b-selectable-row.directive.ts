@@ -19,7 +19,7 @@ export class BSelectableRowDirective {
     this.selectUnSelectRow(event);
   }
 
-  constructor(private bTableService: BTableService, private renderer: Renderer2, private hostElement: ElementRef) { }
+  constructor(private bTableService: BTableService, private renderer: Renderer2, private hostElement: ElementRef) {}
 
 
   private selectUnSelectRow(event) {
