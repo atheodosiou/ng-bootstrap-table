@@ -43,4 +43,10 @@ export class BTableService {
     return this.$tableColumns;
   }
 
+  filter(value:string,field:string){
+    // if(!value || !field) throw new Error('All parameters are required!');
+    // return this._dataSource.filter(o =>
+      // Object.keys(o).some(k => o[k].toLowerCase().includes(value.toLowerCase())));
+      console.log(value,field,this._dataSource,this._columns);
+  }
 }

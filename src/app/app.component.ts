@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { BTableColumn } from '../../projects/ng-bootstrap-table/src/lib/models/table-columns.interface';
 import { HttpClient } from '@angular/common/http';
 import { PageEvent, PaginatorConfig, Sizing, Alignment } from 'projects/ng-bootstrap-table/src/lib/models/paginator.model';
+import { BTableService } from 'projects/ng-bootstrap-table/src/public-api';
 // import { PaginatorConfig, Sizing, Alignment } from 'projects/ng-bootstrap-table/src/public-api';
 
 @Component({
@@ -9,8 +10,8 @@ import { PageEvent, PaginatorConfig, Sizing, Alignment } from 'projects/ng-boots
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  constructor(private http:HttpClient){}
+export class AppComponent implements OnInit, AfterViewInit{
+  constructor(private http:HttpClient, private tableService:BTableService){}
   selectedRow:any;
   pConfig:PaginatorConfig;
   
@@ -22,6 +23,7 @@ export class AppComponent implements OnInit {
     {header:'Phone',field:'phone'},
     {header:'Website',field:'website'}
   ];
+  @ViewChild('table',{static:false}) table:any;
 
   data:any[];
   _data:any[];
@@ -37,6 +39,8 @@ export class AppComponent implements OnInit {
     this.pConfig= new PaginatorConfig();
     this.pConfig.sizing = Sizing.SMALL;
     this.pConfig.alignment= Alignment.RIGHT;
+    this.tableService.columns.subscribe(res=>{console.log('columns initialized!')});
+    this.tableService.dataSource.subscribe(res=>{console.log('value initialized!'),this.tableService.filter('asdfadf','sadfasdfaf')});
 
     this.http.get('https://jsonplaceholder.typicode.com/users')
     .subscribe((users:any[])=>{
@@ -44,6 +48,10 @@ export class AppComponent implements OnInit {
       // this._data=users;
       // this.data = this.paginate(this._data,this.rows,this.activePage);
     });
+
+  }
+  ngAfterViewInit(){
+    // console.log(this.table)
   }
 
   onRowSelect(event){

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input,ContentChild, TemplateRef, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
+import { Component, OnInit, Input,ContentChild, TemplateRef, Output, EventEmitter, ViewChild, ElementRef, ɵAPP_ROOT} from '@angular/core';
+import {filter} from 'lodash';
 
 @Component({
   selector: 'b-table',
@@ -61,12 +62,18 @@ export class TableComponent implements OnInit {
       this._value=this.value;
     }
      this.checkInputs();
+     
   }
 
   onPageSelect(page:PageEvent){
     this.activePage=page.activePage;
     this.onPageChange.emit(page);
     this._value= this.paginate(this.value,page.rowsPerPage,page.activePage);
+  }
+
+  filter(value){
+    console.log('b-table:filter():',value,this.value,this.columns);
+    console.log('Filtered values:',filter(this.value,{name:value}));
   }
 
   //========================================> INTERNAL FUNCTIONS <========================================

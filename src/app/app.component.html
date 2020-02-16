@@ -5,13 +5,19 @@
   <!-- ===============================================> Usage b-table <=============================================== -->
   <!-- =============================================================================================================== -->
 
-  <b-table *ngIf="data" [columns]="columns" [value]="data" [striped]="true" [bordered]="true" [small]="true" [dark]="true"
+  <b-table #dt *ngIf="data" [columns]="columns" [value]="data" [striped]="true" [bordered]="true" [small]="true" [dark]="true"
     [hover]="true" [headLight]="true"
     (onRowSelect)="selectedRow=$event;onRowSelect($event)" (onRowUnselect)="selectedRow=$event;onRowUnselect($event)"
     (onPageChange)="onPageChange($event)">
     <ng-template bTemplate="header">
+     
       <tr>
         <th *ngFor="let col of columns">{{col.header}}</th>
+      </tr>
+      <tr>
+        <th colspan="5">
+          <input type="text" placeholder="Global Filter" (input)="dt.filter($event.target.value)" style="width:100%">
+        </th>
       </tr>
     </ng-template>
     <ng-template bTemplate="body" let-rowData>
