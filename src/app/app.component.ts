@@ -40,8 +40,9 @@ export class AppComponent implements OnInit {
 
     this.http.get('https://jsonplaceholder.typicode.com/users')
     .subscribe((users:any[])=>{
-      this._data=users;
-      this.data = this.paginate(this._data,this.rows,this.activePage);
+      this.data=users;
+      // this._data=users;
+      // this.data = this.paginate(this._data,this.rows,this.activePage);
     });
   }
 
@@ -55,12 +56,9 @@ export class AppComponent implements OnInit {
 
   onPageChange(event:PageEvent){
     console.log(event)
-    this.data= this.paginate(this._data,event.rowsPerPage,event.activePage);
+    // this.data= this.paginate(this._data,event.rowsPerPage,event.activePage);
     // console.log(event,this.data);
   }
 
-  private paginate(array:any[],page_size:number,page_number:number):any[]{
-    --page_number;
-    return array.slice(page_number * page_size, (page_number + 1) * page_size);
-  }
+  
 }

@@ -9,13 +9,14 @@ export class TableComponent implements OnInit {
   //context
   ctx;
   pConfig:PaginatorConfig;
-  
+  private _value:any[];
+  activePage:number = 1;
+
   @ContentChild(BHeaderDirective, { static: true, read: TemplateRef }) header: TemplateRef<any>;
   @ContentChild(BBodyDirective, { static: true, read: TemplateRef }) body: TemplateRef<any>;
 
   @Input() value:any[];
   @Input() columns: any[];
-
   @Input() striped: boolean;
   @Input() bordered: boolean;
   @Input() borderless: boolean;
@@ -45,23 +46,27 @@ export class TableComponent implements OnInit {
   
   ngOnInit() {
     this.bTableService.onRowSelectSubject.subscribe(value=>{
-      // console.log('table>onRowSelectSubject',value)
       this.onRowSelect.emit(value);
     })
     this.bTableService.onRowUnselectSubject.subscribe(value=>{
       this.onRowUnselect.emit(value);
     })
+    
+    this.bTableService.dataSource.next(this.value);
+    this.bTableService.columns.next(this.columns);
+
     if(this.paginator){
       this.initializePaginator();
     }
      this.checkInputs();
-    //  console.log(this.paginator,this.rows,this.totalRecords,this.paginatorConfig)
   }
 
   onPageSelect(page:PageEvent){
-    console.log(page)
+    this.activePage=page.activePage;
     this.onPageChange.emit(page);
+    this._value= this.paginate(this.value,page.rowsPerPage,page.activePage);
   }
+
   //========================================> INTERNAL FUNCTIONS <========================================
   private initializePaginator(){
     if(!this.paginatorConfig){
@@ -72,6 +77,7 @@ export class TableComponent implements OnInit {
     }else{
       this.pConfig = this.paginatorConfig;
     }
+    this._value = this.paginate(this.value,this.rows,this.activePage);
   }
 
   private checkInputs(){
@@ -84,6 +90,11 @@ export class TableComponent implements OnInit {
         throw new Error('Missing required properties! \'rows\' and \'totalRecords\' must be provided if \'paginator\' is true.')
       }
     }
+  }
+
+  private paginate(array:any[],page_size:number,page_number:number):any[]{
+    --page_number;
+    return array.slice(page_number * page_size, (page_number + 1) * page_size);
   }
 }
 
