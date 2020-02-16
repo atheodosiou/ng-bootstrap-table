@@ -57,6 +57,8 @@ export class TableComponent implements OnInit {
 
     if(this.paginator){
       this.initializePaginator();
+    }else{
+      this._value=this.value;
     }
      this.checkInputs();
   }

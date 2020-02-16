@@ -6,7 +6,7 @@
   <!-- =============================================================================================================== -->
 
   <b-table *ngIf="data" [columns]="columns" [value]="data" [striped]="true" [bordered]="true" [small]="true" [dark]="true"
-    [paginator]="true" [paginatorConfig]="pConfig" [rows]="rows" [totalRecords]="data?.length" [hover]="true" [headLight]="true"
+    [hover]="true" [headLight]="true"
     (onRowSelect)="selectedRow=$event;onRowSelect($event)" (onRowUnselect)="selectedRow=$event;onRowUnselect($event)"
     (onPageChange)="onPageChange($event)">
     <ng-template bTemplate="header">
